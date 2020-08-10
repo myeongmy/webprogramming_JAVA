@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        header {
+            background-color: #eee;
+        }
+
+        #wrap {
+            /*background-color: #ccc;*/
+            /* float 속성 주고 나니까 속성 사라짐. 개발자도구로 보면 높이가 0인 것을 알 수 있다. 그 이유는 float 자식을 인식을 하지 못하기 때문 */
+            overflow: auto;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        .left,
+        .right,
+        .realright {
+            float: left;
+            height: 200px;
+        }
+
+        .left {
+            width: 17%;
+            margin-right: 3%;
+            background-color: #47c;
+        }
+
+        .right {
+            width: 60%;
+            text-align: center;
+            background-color: #47c;
+        }
+
+        .realright {
+            width: 17%;
+            margin-left: 3%;
+            background-color: #47c;
+        }
+
+        h2 {
+            position: relative;
+        }
+
+        .emoticon {
+            position: absolute;
+            top: 0px;
+            right: 5%;
+            color: #fff;
+        }
+
+        footer {
+            background-color: #eee;
+            clear: both;
+            /* float로 떠있는 것도 인식해라 */
+        }
+    </style>
+</head>
+
+<body>
+    <header>부스트코스는 유익합니다!</header>
+    <div id="wrap">
+        <nav class="left">
+            <ul>
+                <li>menu</li>
+                <li>home</li>
+                <li>home</li>
+            </ul>
+        </nav>
+        <div class="right">
+            <h2>
+                <span>반가워요!</span>
+                <div class="emoticon">:-></div>
+            </h2>
+            <ul>
+                <li>crong</li>
+                <li>jk</li>
+                <li>honux</li>
+            </ul>
+        </div>
+        <div class="realright">
+            oh~ right
+        </div>
+    </div>
+    <footer>Copyright @</footer>
+</body>
+
+</html>
