@@ -16,7 +16,7 @@ nav > ul{
 	background-color: white;
 }
 
-ul > li{
+nav > ul > li{
 	background-color: #41C1C1;
 	width: 100px;
 	height: 30px;
@@ -24,7 +24,7 @@ ul > li{
 	box-shadow: 3px 3px 3px #c8c8c8;
 }
 
-ul > li:hover{
+nav > ul > li:hover{
 	color: #2828CD;
 	cursor: pointer;
 }
@@ -48,40 +48,12 @@ ul > li:hover{
 	top: 20px;
 	right: 0%;
 }
-#buttons > div{
-	float: left;
-	width: 100px;
-	height: 100px;
-	background-color: #41C1C1;
-	line-height: 100px;
-	color: white;
-	box-shadow: 3px 3px 3px #c8c8c8;
-}
-#buttons > div:hover{
-	color: #F5AF64;    /*마우스 올려 놓았을 때 색상 변경*/
-	cursor: pointer;   /*마우스 올려 놓았을 때 커서 모양 변경*/
-}
-#buttons{                  /*selector 적용 순서도 중요*/
-	overflow: hidden;    /*float 작식을 가진 부모 높이 0이 되는 것을 막기 위함*/
-	position: relative;
-	height: 100px;
-	margin-bottom: 10px;
-}
-#introbutton{
-	position: absolute;
-	top: 0px;
-	left: 42%;
-}
-#photobutton{
-	position: absolute;
-	top: 0px;
-	left: 51%;
-}
 #main{
 	background-color: white;
-}
-#introduction > h1{
-	padding-top: 20px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 20px;
+	padding-right: 20px;
 }
 footer > div{
 	height: 50px;
@@ -90,4 +62,9 @@ footer > div{
 	font-size: 10px;
 	color: gray;
 	background-color: white;
+}
+
+#main > ul{
+	list-style: none;
+	text-align: left;
 }
