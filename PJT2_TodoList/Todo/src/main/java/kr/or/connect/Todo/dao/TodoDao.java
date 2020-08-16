@@ -11,7 +11,7 @@ import java.util.List;
 import kr.or.connect.Todo.dto.TodoDto;
 
 public class TodoDao {
-	private static String url = "jdbc:mysql://localhost:3306/connectdb";
+	private static String url = "jdbc:mysql://localhost:3306/connectdb?useUnicode=true&characterEncoding=utf8";
 	private static String user = "connectuser";
 	private static String password = "connect123!@#";
 	
