@@ -25,38 +25,38 @@
 			<li onclick="location.href='/Todo/TodoFormServlet' ">새로운 TODO 등록</li>
 		</ul>
 		<ul>
-			<li><div>TODO</div>
+			<li class="todo"><div>TODO</div>
 			<%
 				for(int i=0;i<todoList.size();i++){
 					String [] arg = todoList.get(i).getRegDate().split(" ");
 			%>
 					<div><%= todoList.get(i).getTitle() %><br>등록날짜:<%= arg[0] %>, <%= todoList.get(i).getName() %>, 우선순위 <%= todoList.get(i).getSequence() %>
-					<button>-></button>
+					<button id = "<%= todoList.get(i).getType() %>#<%= todoList.get(i).getId() %>" >-></button>
 					</div>
 			<% 
 				}
 			%>
 			</li>
 			
-			<li><div>DOING</div>
+			<li class="doing"><div>DOING</div>
 			<%
 				for(int i=0;i<doingList.size();i++){
 					String [] arg = doingList.get(i).getRegDate().split(" ");
 			%>
 					<div><%= doingList.get(i).getTitle() %><br>등록날짜:<%= arg[0] %>, <%= doingList.get(i).getName() %>, 우선순위 <%= doingList.get(i).getSequence() %>
-					<button>-></button>
+					<button id = "<%= doingList.get(i).getType() %>#<%= doingList.get(i).getId() %>" >-></button>
 					</div>
 			<% 
 				}
 			%>
 			</li>
-			<li><div>DONE</div>
+			<li class="done"><div>DONE</div>
 			<%
 				for(int i=0;i<doneList.size();i++){
 					String [] arg = doneList.get(i).getRegDate().split(" ");
 			%>
 					<div><%= doneList.get(i).getTitle() %><br>등록날짜:<%= arg[0] %>, <%= doneList.get(i).getName() %>, 우선순위 <%= doneList.get(i).getSequence() %>
-					<button>-></button>
+	
 					</div>
 			<% 
 				}
@@ -65,4 +65,65 @@
 		</ul>
 	</section>
 </body>
+<script>
+	var buttons = document.querySelectorAll("button");
+	
+	for(var i=0;i<buttons.length;i++){
+		buttons[i].addEventListener("click", remove);
+	}
+	
+	function remove(){
+		var buttonInfo = this.id.split("#");
+		var type = buttonInfo[0];
+		var id = buttonInfo[1];
+		
+		var removeTarget = this;
+		removeTarget.parentNode.remove(removeTarget);
+		
+		ajax(type, id);
+	}
+	
+	function ajax(type, id){
+		var xhr = new XMLHttpRequest();
+		
+		xhr.onreadystatechange = function(){
+			//서버에서 응답이 완료되면 실행되는 함수
+			if(xhr.readyState === XMLHttpRequest.DONE){   //꼭 추가해주어야함
+				if(xhr.status === 200){
+					console.log("success");
+					var json = this.responseText;
+					json = JSON.parse(json);   //json 문자열을 json으로 파싱
+					
+					var type = json['type'];
+					var title = json['title'];
+					var sequence = json['sequence'];
+					var regDate = json['regDate'].split(" ");
+					var name = json['name'];
+					var id = json['id'];
+		
+				
+					if(type === 'DOING'){
+						var newElement = document.createElement('div');
+						newElement.innerHTML = '<div>'+title+'<br>등록날짜:'+regDate[0]+', '+name+', 우선순위 '+sequence+'<button id="DOING#'+id+'">-></button>';
+						newElement.children[0].children[1].addEventListener("click", remove);     // event listener 등록해주어야함
+						
+						var parent = document.querySelector('.doing');
+						parent.appendChild(newElement);
+						
+					}else if(type === 'DONE'){
+						var newElement = document.createElement('div');
+						newElement.innerHTML = '<div>'+title+'<br>등록날짜:'+regDate[0]+', '+name+', 우선순위 '+sequence;
+						
+						var parent = document.querySelector('.done');
+						parent.appendChild(newElement);
+					}
+				}
+			}
+		};
+		
+		xhr.open("POST", "http://localhost:8080/Todo/TodoTypeServlet", true);
+		xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');   //post 방식으로 데이터를 전송할 때 이용하는 형태
+		xhr.send('type='+type+'&id='+id);
+	}
+</script>
 </html>
