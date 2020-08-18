@@ -1,0 +1,84 @@
+body{
+	background-color: #CEECF5;
+	padding-left: 5%;
+	padding-right: 5%;
+}
+section{
+	background-color: white;
+}
+ul{
+	list-style: none;
+}
+
+.header > li{
+	float: left;
+	width: 180px;
+	height: 40px;
+}
+
+.header{
+	overflow: hidden;
+	position: relative;
+	padding-left: 0px;
+}
+
+.header >li#new-button{
+	background-color: #0080FF;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	text-align: center;
+	line-height: 40px;
+	color: white;
+	margin-top: 30px;
+	margin-right: 90px;
+}
+
+.header > li#title{
+	line-height: 80px;
+	font-size: 1.5em;
+	font-weight: bold;
+	transform:rotate(-23deg);
+	margin-top: 5px;
+	height: 80px;
+}
+
+.container> li{
+	float: left;
+	width: 33%;
+}
+.container{
+	overflow: hidden;
+}
+.todo > #todo-title, .doing > #doing-title, .done > #done-title{
+	background-color: #0B3861;
+	color: white;
+	font-weight: bold;
+	font-size: 1.2em;
+	padding-left: 10px;
+	width: 270px;
+	height: 50px;
+	line-height: 50px;
+	margin-bottom: 10px;
+}
+
+.box{
+	background-color: #CEF6F5;
+	width: 260px;
+	height: 70px;
+	padding-left: 10px;
+	padding-right: 10px;
+	font-size: 0.7em;
+	line-height: 35px;
+	position: relative;
+	margin-bottom: 10px;
+}
+.box > button{
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+}
+span{      /* span 태그는 의미 없는 태그이지만, 줄마다 속성을 다르게 주기 위해 사용 */
+	font-size: 1.2em;
+	font-weight: bold;
+}

@@ -17,20 +17,21 @@
 <head>
 <meta charset="UTF-8">
 <title>TodoList</title>
+<link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 <body>
 	<section>
-		<ul>
-			<li>나의 해야할 일들</li>
-			<li onclick="location.href='/Todo/TodoFormServlet' ">새로운 TODO 등록</li>
+		<ul class="header">
+			<li id="title">나의 해야할 일들</li>
+			<li id="new-button" onclick="location.href='/Todo/TodoFormServlet' ">새로운 TODO 등록</li>
 		</ul>
-		<ul>
-			<li class="todo"><div>TODO</div>
+		<ul class="container">
+			<li class="todo"><div id="todo-title">TODO</div>
 			<%
 				for(int i=0;i<todoList.size();i++){
 					String [] arg = todoList.get(i).getRegDate().split(" ");
 			%>
-					<div><%= todoList.get(i).getTitle() %><br>등록날짜:<%= arg[0] %>, <%= todoList.get(i).getName() %>, 우선순위 <%= todoList.get(i).getSequence() %>
+					<div class="box"><span><%= todoList.get(i).getTitle() %></span><br>등록날짜:<%= arg[0] %>, <%= todoList.get(i).getName() %>, 우선순위 <%= todoList.get(i).getSequence() %>
 					<button id = "<%= todoList.get(i).getType() %>#<%= todoList.get(i).getId() %>" >-></button>
 					</div>
 			<% 
@@ -38,24 +39,24 @@
 			%>
 			</li>
 			
-			<li class="doing"><div>DOING</div>
+			<li class="doing"><div id="doing-title">DOING</div>
 			<%
 				for(int i=0;i<doingList.size();i++){
 					String [] arg = doingList.get(i).getRegDate().split(" ");
 			%>
-					<div><%= doingList.get(i).getTitle() %><br>등록날짜:<%= arg[0] %>, <%= doingList.get(i).getName() %>, 우선순위 <%= doingList.get(i).getSequence() %>
+					<div class="box"><span><%= doingList.get(i).getTitle() %></span><br>등록날짜:<%= arg[0] %>, <%= doingList.get(i).getName() %>, 우선순위 <%= doingList.get(i).getSequence() %>
 					<button id = "<%= doingList.get(i).getType() %>#<%= doingList.get(i).getId() %>" >-></button>
 					</div>
 			<% 
 				}
 			%>
 			</li>
-			<li class="done"><div>DONE</div>
+			<li class="done"><div id="done-title">DONE</div>
 			<%
 				for(int i=0;i<doneList.size();i++){
 					String [] arg = doneList.get(i).getRegDate().split(" ");
 			%>
-					<div><%= doneList.get(i).getTitle() %><br>등록날짜:<%= arg[0] %>, <%= doneList.get(i).getName() %>, 우선순위 <%= doneList.get(i).getSequence() %>
+					<div class="box"><span><%= doneList.get(i).getTitle() %></span><br>등록날짜:<%= arg[0] %>, <%= doneList.get(i).getName() %>, 우선순위 <%= doneList.get(i).getSequence() %>
 	
 					</div>
 			<% 
@@ -104,15 +105,15 @@
 				
 					if(type === 'DOING'){
 						var newElement = document.createElement('div');
-						newElement.innerHTML = '<div>'+title+'<br>등록날짜:'+regDate[0]+', '+name+', 우선순위 '+sequence+'<button id="DOING#'+id+'">-></button>';
-						newElement.children[0].children[1].addEventListener("click", remove);     // event listener 등록해주어야함
-						
+						newElement.innerHTML = '<div class="box"><span>'+title+'</span><br>등록날짜:'+regDate[0]+', '+name+', 우선순위 '+sequence+'<button id="DOING#'+id+'">-></button>';
+						newElement.children[0].children[2].addEventListener("click", remove);     // event listener 등록해주어야함
+						console.log(newElement.children[0]);
 						var parent = document.querySelector('.doing');
 						parent.appendChild(newElement);
 						
 					}else if(type === 'DONE'){
 						var newElement = document.createElement('div');
-						newElement.innerHTML = '<div>'+title+'<br>등록날짜:'+regDate[0]+', '+name+', 우선순위 '+sequence;
+						newElement.innerHTML = '<div class="box"><span>'+title+'</span><br>등록날짜:'+regDate[0]+', '+name+', 우선순위 '+sequence;
 						
 						var parent = document.querySelector('.done');
 						parent.appendChild(newElement);
