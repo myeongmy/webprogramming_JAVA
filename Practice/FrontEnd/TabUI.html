@@ -1,0 +1,102 @@
+<html>
+
+<head>
+    <style>
+        h2 {
+            text-align: center;
+        }
+
+        h2,
+        h4 {
+            margin: 0px;
+        }
+
+        .tab {
+            width: 600px;
+            margin: 0px auto;
+        }
+
+        .tabmenu {
+            background-color: bisque;
+
+        }
+
+        .tabmenu>div {
+            display: inline-block;
+            width: 140px;
+            text-align: center;
+            height: 50px;
+            line-height: 50px;
+            cursor: pointer;
+
+        }
+
+        .content {
+            width: 473px;
+            padding: 5%;
+            background-color: antiquewhite;
+            margin: 0px auto;
+            /* 가운데 정렬 */
+        }
+    </style>
+</head>
+
+<body>
+    <h2> TAB UI TEST</h2>
+    <div class="tab">
+        <div class="tabmenu">
+            <div>crong</div>
+            <div>jk</div>
+            <div>pobi</div>
+            <div>honux</div>
+        </div>
+
+    </div>
+    <section class="content">
+        <h4>hello jk</h4>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis sequi rerum velit distinctio, harum veniam
+            ipsa impedit explicabo corrupti placeat officia illo voluptatem minus laborum ipsum, beatae facere
+            cupiditate? Repudiandae.</p>
+    </section>
+</body>
+<script id="template" type="my-template">
+        <h4>hello {name}</h4>
+        <ul>
+            <li>{favorite1}</li>
+            <li>{favorite2}</li>
+        </ul>
+    </script>
+<script>
+    var tabmenu = document.querySelector('.tabmenu');
+    tabmenu.addEventListener("click", function (evt) {
+        ajax(evt.target);
+    });
+
+    function ajax(target) {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    var json = JSON.parse(this.responseText);
+                    var section = document.querySelector('section');
+
+                    for(var i=0;i<json.length;i++){
+                        if(json[i].name === target.innerHTML){
+                            var template = document.querySelector('#template');
+                            var text = "";
+
+                            text = template.innerHTML.replace("{name}", json[i].name).replace("{favorite1}", json[i].favorites[0]).replace("{favorite2}", json[i].favorites[1]);
+                            
+                            section.innerHTML = text;
+                        }
+                    }
+                }
+            }
+        };
+
+        xhr.open("GET", "./json.txt");
+        xhr.send();
+    }
+</script>
+
+</html>
