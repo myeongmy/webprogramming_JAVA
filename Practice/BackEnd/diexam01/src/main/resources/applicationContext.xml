@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="userBean" class="kr.or.connect.diexam01.UserBean"></bean>  <!-- 이게 new UserBean()과 동일한 의미다!라고 기억하기 -->
+    <bean id="e" class="kr.or.connect.diexam01.Engine"></bean>
+    <bean id="c" class="kr.or.connect.diexam01.Car">
+    	<property name="engine" ref="e"></property>  <!-- 위에서 생성된 e 인스턴스를 c인스턴스 안에서 사용하겠다! 이런 의미를 내포한다. -->
+    </bean>
+</beans>
